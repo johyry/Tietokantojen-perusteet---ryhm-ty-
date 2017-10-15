@@ -1,10 +1,10 @@
-# tikape-runko
+﻿# TKT10004, Tietokantojen perusteet, 5 op, syksy 2017
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+Tietokantojen perusteet -kurssilla ryhmätyönä tehtävä web-sovellus.
 
-Repoon contribuoineet käyttäjät:
-- jouko_69
-- darth_aleksi
-- xXmikko
-- xDjonttu
-- timppa
+Ryhmän jäsenet:
+- Johannes Hyry
+- Timo Järvenpää
+- Jouko Kelomäki
+- Mikko Savolainen
+- Aleksi Willman
