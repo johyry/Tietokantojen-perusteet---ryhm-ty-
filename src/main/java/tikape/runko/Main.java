@@ -51,7 +51,7 @@ public class Main {
              
             HashMap map = new HashMap<>();
             // mappi raaka-aineista
-            map.put("raaka-aineet", raakaainedao.listaaKaikki());
+            map.put("raakaaineet", raakaainedao.listaaKaikki());
 
             return new ModelAndView(map, "raaka-aine -main");
         }, new ThymeleafTemplateEngine());

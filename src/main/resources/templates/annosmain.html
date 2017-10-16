@@ -13,11 +13,11 @@
 
         <ol>
             <li th:each="opiskelija: ${opiskelijat}">
-                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">linkki</a>
+                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">poista (ei toimi)</a>
             </li>
         </ol>
 
-        <p> Luo uusi annos </p>
+        <h2> Luo uusi annos </h2>
 
         <form method="POST" action="/annosMain">
             Annoksen nimi: <br/>

@@ -11,12 +11,12 @@
 
         
         <ol>
-            <li th:each="Raaka-aine: ${raaka-aineet}">
-                <span th:text="${RaakaAine.nimi}">raaka-aineen nimi</span> 
+            <li th:each="opiskelija: ${raakaaineet}">
+                <span th:text="${opiskelija.nimi}">raaka-aineen nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">Poista (ei toimi)</a>
+
             </li>
         </ol>
         
-        <!--<a th:href="${'/opiskelijat/' + RaakaAine.id}">poista (ei toimi)</a>-->
         
         <h2> Lisaa uusi raaka-aine </h2>
         
