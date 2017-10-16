@@ -5,8 +5,14 @@
  */
 package tikape.runko.database;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import tikape.runko.domain.AnnosRaakaAine;
+import tikape.runko.domain.RaakaAine;
 
 /**
  *
@@ -19,19 +25,27 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         this.database = database;
     }
 
-    @Override
-    public AnnosRaakaAine findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    public List<AnnosRaakaAine> listaaKaikki() throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine");
 
-    @Override
-    public List<AnnosRaakaAine> findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        ResultSet rs = stmt.executeQuery();
+        List<AnnosRaakaAine> raineet = new ArrayList<>();
+        while (rs.next()) {
+            Integer jarjestys = rs.getInt("jarjestys");
+            String maara = rs.getString("maara");
+            String ohje = rs.getString("ohje");
+            Integer raaka_aine_id = rs.getInt("raaka_aine_id");
+            Integer annos_id = rs.getInt("annos_id");
+            raineet.add(new AnnosRaakaAine(jarjestys, maara, ohje, raaka_aine_id, annos_id));
+        }
 
-    @Override
-    public void delete(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return raineet;
     }
 
 

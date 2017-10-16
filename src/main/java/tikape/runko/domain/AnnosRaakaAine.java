@@ -4,7 +4,7 @@ package tikape.runko.domain;
 public class AnnosRaakaAine {
     
     private Integer jarjestys;
-    private Integer maara;
+    private String maara;
     private String ohje;
     private Integer raaka_aine_id;
     private Integer annos_id;
@@ -13,7 +13,7 @@ public class AnnosRaakaAine {
     public AnnosRaakaAine() {
         
     }
-    public AnnosRaakaAine(Integer jarjestys, Integer maara, String ohje, Integer raaka_aine_id, Integer annos_id) {
+    public AnnosRaakaAine(Integer jarjestys, String maara, String ohje, Integer raaka_aine_id, Integer annos_id) {
         this.jarjestys = jarjestys;
         this.maara = maara;
         this.ohje = ohje;
@@ -29,7 +29,7 @@ public class AnnosRaakaAine {
     public Integer getAnnos_id() {
         return annos_id;
     }
-    public Integer getMaara() {
+    public String getMaara() {
         return maara;
     }
 
@@ -45,7 +45,7 @@ public class AnnosRaakaAine {
         this.annos_id = annos_id;
     }
 
-    public void setMaara(Integer maara) {
+    public void setMaara(String maara) {
         this.maara = maara;
     }
 
