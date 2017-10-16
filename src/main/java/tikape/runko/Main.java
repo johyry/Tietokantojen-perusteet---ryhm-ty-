@@ -39,6 +39,21 @@ public class Main {
             return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());
         
+        
+        // RAAKA-AINE -MAIN SIVUN KOODI
+        
+         get("/raakaAineMain", (req, res) -> {
+             
+             
+            HashMap map = new HashMap<>();
+            map.put("opiskelijat", opiskelijaDao.findAll());
+
+            return new ModelAndView(map, "raaka-aine -main");
+        }, new ThymeleafTemplateEngine());
+         
+         
+         
+        
 
         get("/opiskelijat", (req, res) -> {
             HashMap map = new HashMap<>();

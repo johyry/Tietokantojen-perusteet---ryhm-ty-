@@ -1,16 +1,48 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Otsikko</title>
+        <meta charset="utf-8" />
     </head>
+
     <body>
-        <div>TODO write content</div>
+
+        <h1>Annokset</h1>
+
+
+        <ol>
+            <li th:each="opiskelija: ${opiskelijat}">
+                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">linkki</a>
+            </li>
+        </ol>
+
+        <p> Luo uusi annos </p>
+
+        <form method="POST" action="/annosMain">
+            Annoksen nimi: <br/>
+            <input type="text" name="nimi"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
+        <br> </br>
+
+        <form method="POST" action="/annosMain">
+            Annoksen nimi:<br/>
+            <input type="text" name="tähän tulee lista olemassaolevista annoksista (ei toimi)"/><br/>
+            Lisättävä raaka-aine<br/>
+            <input type="text" name="tähän tulee lista olemassaolevista raaka-aineista (ei toimi)"/><br/>
+            Järjestys<br/>
+            <input type="text" name="jarjestys"/><br/>
+            Määrä<br/>
+            <input type="text" name="maara"/><br/>
+            Ohje<br/>
+            <input type="text" name="ohje"/><br/>
+            <input type="submit" value="Lisää"/>
+        </form>
+        
+        <p><a href="/annosMain">Smoothielistaukseen! (ei toimi)</a></p>
+
+
+
     </body>
 </html>
