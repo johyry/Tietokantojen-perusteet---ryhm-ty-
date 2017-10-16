@@ -38,7 +38,7 @@ public class Main {
             
                        
             HashMap map = new HashMap<>();
-            map.put("opiskelijat", raakaainedao.listaaKaikki());
+            map.put("raakaaineet", raakaainedao.listaaKaikki());
 
             return new ModelAndView(map, "annosmain");
         }, new ThymeleafTemplateEngine());
