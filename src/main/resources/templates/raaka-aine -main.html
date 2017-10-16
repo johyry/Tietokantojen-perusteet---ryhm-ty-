@@ -11,8 +11,8 @@
 
         
         <ol>
-            <li th:each="opiskelija: ${raakaaineet}">
-                <span th:text="${opiskelija.nimi}">raaka-aineen nimi</span> <a th:href="${'/raakaaineet/' + opiskelija.id}">Poista (ei toimi)</a>
+            <li th:each="aine: ${raakaaineet}">
+                <span th:text="${aine.nimi}">raaka-aineen nimi</span> <a th:href="${'/raakaaineet/' + aine.id}">Poista (ei toimi)</a>
 
             </li>
         </ol>
