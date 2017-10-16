@@ -5,6 +5,7 @@ import java.util.List;
 import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tikape.runko.database.AnnosDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.RaakaAineDao;
 import tikape.runko.domain.RaakaAine;
@@ -16,6 +17,7 @@ public class Main {
         database.init();
 
         RaakaAineDao raakaainedao = new RaakaAineDao(database);
+        AnnosDao annosdao = new AnnosDao(database);
         
         List<RaakaAine> lista = raakaainedao.listaaKaikki();
         
@@ -38,7 +40,7 @@ public class Main {
             
                        
             HashMap map = new HashMap<>();
-            map.put("raakaaineet", raakaainedao.listaaKaikki());
+            map.put("annokset", annosdao.listaaKaikki());
 
             return new ModelAndView(map, "annosmain");
         }, new ThymeleafTemplateEngine());
