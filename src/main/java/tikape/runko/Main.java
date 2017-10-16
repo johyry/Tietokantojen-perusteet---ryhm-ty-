@@ -19,48 +19,46 @@ public class Main {
         
         List<RaakaAine> lista = raakaainedao.listaaKaikki();
         
-        for (int i = 0; i <lista.size(); i++) {
-            System.out.println(lista.get(i).getNimi());
-        }
+        
         
         
         // PÄÄSIVUN KOODI ALLA
 
-//        get("/", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("viesti", "random shit");
-//
-//            return new ModelAndView(map, "index");
-//        }, new ThymeleafTemplateEngine());
-//        
-//        
-//        // ANNOS-MAIN SIVUN KOODI
-//        
-//        get("/annosMain", (req, res) -> {
-//            
-//                       
-//            HashMap map = new HashMap<>();
-//            map.put("opiskelijat", raakaainedao.listaaKaikki());
-//
-//            return new ModelAndView(map, "annosmain");
-//        }, new ThymeleafTemplateEngine());
-//        
-//        
-//        // RAAKA-AINE -MAIN SIVUN KOODI
-//        
-//         get("/raakaAineMain", (req, res) -> {
-//             
-//             
-//            HashMap map = new HashMap<>();
-//            // mappi raaka-aineista
-//            map.put("raaka-aineet", raakaainedao.listaaKaikki());
-//
-//            return new ModelAndView(map, "raaka-aine -main");
-//        }, new ThymeleafTemplateEngine());
-//         
-//         
-//         
-//        
+        get("/", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("viesti", "random shit");
+
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+        
+        
+        // ANNOS-MAIN SIVUN KOODI
+        
+        get("/annosMain", (req, res) -> {
+            
+                       
+            HashMap map = new HashMap<>();
+            map.put("opiskelijat", raakaainedao.listaaKaikki());
+
+            return new ModelAndView(map, "annosmain");
+        }, new ThymeleafTemplateEngine());
+        
+        
+        // RAAKA-AINE -MAIN SIVUN KOODI
+        
+         get("/raakaAineMain", (req, res) -> {
+             
+             
+            HashMap map = new HashMap<>();
+            // mappi raaka-aineista
+            map.put("raaka-aineet", raakaainedao.listaaKaikki());
+
+            return new ModelAndView(map, "raaka-aine -main");
+        }, new ThymeleafTemplateEngine());
+         
+         
+         
+        
 //
 //        get("/opiskelijat", (req, res) -> {
 //            HashMap map = new HashMap<>();
@@ -68,12 +66,12 @@ public class Main {
 //
 //            return new ModelAndView(map, "opiskelijat");
 //        }, new ThymeleafTemplateEngine());
+
+//        get("/opiskelijat/:id", (req, res) -> {
+//            HashMap map = new HashMap<>();
+//            map.put("opiskelija", raakaainedao.listaaKaikki(Integer.parseInt(req.params("id"))));
 //
-////        get("/opiskelijat/:id", (req, res) -> {
-////            HashMap map = new HashMap<>();
-////            map.put("opiskelija", raakaainedao.listaaKaikki(Integer.parseInt(req.params("id"))));
-////
-////            return new ModelAndView(map, "opiskelija");
-////        }, new ThymeleafTemplateEngine());
+//            return new ModelAndView(map, "opiskelija");
+//        }, new ThymeleafTemplateEngine());
     }
 }
