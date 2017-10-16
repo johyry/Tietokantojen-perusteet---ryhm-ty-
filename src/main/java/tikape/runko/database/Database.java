@@ -52,8 +52,8 @@ public class Database {
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('leipä');");//4
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('hernekeitto');");//5
         
-        lista.add("CREATE TABLE AnnosRaakaAine  ,"
-                + " jarjestys integer,"
+        lista.add("CREATE TABLE AnnosRaakaAine "
+                + "(jarjestys integer,"
                 + " maara varchar(100),"
                 + " ohje varchar(3000),"
                 + " FOREIGN KEY (raaka_aine_id) REFERENCES RaakaAine(id),"
