@@ -11,10 +11,12 @@
 
         
         <ol>
-            <li th:each="opiskelija: ${opiskelijat}">
-                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">linkki</a>
+            <li th:each="Raaka-aine: ${raaka-aineet}">
+                <span th:text="${RaakaAine.nimi}">raaka-aineen nimi</span> 
             </li>
         </ol>
+        
+        <!--<a th:href="${'/opiskelijat/' + RaakaAine.id}">poista (ei toimi)</a>-->
         
         <h2> Lisaa uusi raaka-aine </h2>
         
@@ -24,7 +26,7 @@
             <input type="submit" value="Lisää"/>
         </form>
         
-                <p><a href="/annosMain">Annoslistaukseen! (ei toimi)</a></p>
+                <p><a href="/annosMain">Annoslistaukseen!</a></p>
 
         
     </body>
