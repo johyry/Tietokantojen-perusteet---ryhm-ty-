@@ -3,8 +3,8 @@ package tikape.runko.domain;
 
 public class AnnosRaakaAine {
     
-    private int jarjestys;
-    private int maara;
+    private Integer jarjestys;
+    private Integer maara;
     private String ohje;
     private Integer raaka_aine_id;
     private Integer annos_id;

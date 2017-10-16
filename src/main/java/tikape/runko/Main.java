@@ -14,13 +14,31 @@ public class Main {
         database.init();
 
         OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+        
+        
+        // PÄÄSIVUN KOODI ALLA
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
+            map.put("viesti", "random shit");
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
+        
+        
+        // ANNOS-MAIN SIVUN KOODI
+        
+        get("/annosMain", (req, res) -> {
+            
+            
+            
+            
+            HashMap map = new HashMap<>();
+            map.put("opiskelijat", opiskelijaDao.findAll());
+
+            return new ModelAndView(map, "opiskelijat");
+        }, new ThymeleafTemplateEngine());
+        
 
         get("/opiskelijat", (req, res) -> {
             HashMap map = new HashMap<>();
