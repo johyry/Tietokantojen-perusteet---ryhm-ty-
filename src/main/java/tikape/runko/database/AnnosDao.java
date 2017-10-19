@@ -45,10 +45,10 @@ public class AnnosDao implements Dao<Annos, Integer>{
         return annokset;
     }
     
-    public void uusi(String nimi) throws SQLException {
+    public void uusi(Annos annos) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO Annos(nimi) VALUES(?)");
-        stmt.setString(1, nimi);
+        stmt.setString(1, annos.getNimi());
         stmt.executeUpdate();
         stmt.close();
         connection.close();

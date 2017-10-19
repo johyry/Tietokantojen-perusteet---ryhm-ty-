@@ -9,6 +9,7 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AnnosDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.RaakaAineDao;
+import tikape.runko.domain.Annos;
 import tikape.runko.domain.RaakaAine;
 
 public class Main {
@@ -39,6 +40,15 @@ public class Main {
 
             return new ModelAndView(map, "annosmain");
         }, new ThymeleafTemplateEngine());
+        
+        // Annossivun lomakkeen käsittely
+        Spark.post("/annosMain", (req, res) -> {
+            String nimi = req.queryParams("nimi");
+            annosdao.uusi(new Annos(-1, nimi));
+            res.redirect("/annosMain");
+            return "";
+        });
+        
 
         // RAAKA-AINE -MAIN SIVUN KOODI
         get("/raakaAineMain", (req, res) -> {
