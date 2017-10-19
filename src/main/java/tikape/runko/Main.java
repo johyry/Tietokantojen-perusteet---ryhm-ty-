@@ -49,6 +49,15 @@ public class Main {
             return "";
         });
         
+        // Liitostaulun lomakkeen käsittely
+        Spark.post("/annosMain", (req, res) -> {
+            String
+            String maara = req.queryParams("maara");
+            annosdao.uusi(new Annos(-1, nimi));
+            res.redirect("/annosMain");
+            return "";
+        });
+        
 
         // RAAKA-AINE -MAIN SIVUN KOODI
         get("/raakaAineMain", (req, res) -> {
