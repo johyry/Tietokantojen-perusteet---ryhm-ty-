@@ -27,10 +27,12 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     
     public void uusi(AnnosRaakaAine ara) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine VALUES(?, ?, ?)");
-        stmt.setInt(1, ara.getAnnos_id());
-        stmt.setInt(2, ara.getRaaka_aine_id());
-        stmt.setString(3, ara.getOhje());
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine VALUES(?, ?, ?, ?, ?)");
+        stmt.setInt(2, ara.getAnnos_id());
+        stmt.setInt(1, ara.getRaaka_aine_id());
+        stmt.setInt(3, 4);
+        stmt.setString(4, ara.getMaara());
+        stmt.setString(5, ara.getOhje());
         stmt.executeUpdate();
         stmt.close();
         connection.close();

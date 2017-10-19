@@ -67,8 +67,8 @@ public class AnnosDao implements Dao<Annos, Integer>{
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos WHERE nimi = '" + nimi + "'");
         ResultSet rs = stmt.executeQuery();
-        stmt.close();
         int palaute = rs.getInt("id");
+        stmt.close();
         rs.close();
         connection.close();
         return palaute;

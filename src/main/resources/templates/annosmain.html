@@ -20,6 +20,7 @@
         <h2> Luo uusi annos </h2>
 
         <form method="POST" action="/annosMain">
+            <input type="hidden" name="valikko" value="1"/>
             Annoksen nimi: <br/>
             <input type="text" name="nimi"/><br/>
             <input type="submit" value="Lisää"/>
@@ -29,6 +30,7 @@
         <h2> Lisää annokseen raaka-aine </h2>
 
         <form method="POST" action="/annosMain">
+            <input type="hidden" name="valikko" value="2"/>
             Annoksen nimi:<br/>
             <select name="annosValikko">
                 <option th:each="annos: ${annokset}">
@@ -37,7 +39,7 @@
             </select>
             <br/>
             Lisättävä raaka-aine<br/>
-            <select>
+            <select name="raakaaineValikko">
                 <option th:each="ra: ${rat}">
                     <span th:text="${ra.nimi}"> ran nimi</span>
                 </option>

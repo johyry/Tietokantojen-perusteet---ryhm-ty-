@@ -53,58 +53,70 @@ public class Main {
 //            res.redirect("/annosMain");
 //            return "";
 //        });
-
-        
-        
         //Liitostaulun lomakkeen käsittely 
         Spark.post("/annosMain", (req, res) -> {
-            /*
-            if(req.queryParams("ohje").length() == 0){
-            String nimi = req.queryParams("nimi");
-            annosdao.uusi(new Annos(-1, nimi));
-            res.redirect("/annosMain");
+            if (req.queryParams("valikko").equals("1")) {
+                String nimi = req.queryParams("nimi");
+                annosdao.uusi(new Annos(-1, nimi));
+                res.redirect("/annosMain");
+                return "";
+            } 
+            if(req.queryParams("valikko").equals("2")) {
+                System.out.println("2-valikossa");
+                String maara = req.queryParams("maara");
+                String ohje = req.queryParams("ohje");
+                String annos = req.queryParams("annosValikko");
+                System.out.println("blaa" + annos + "blaa");
+                String raakaaine = "vesi";
+                annosraakaainedao.uusi(new AnnosRaakaAine(-1, maara, ohje, annosdao.getId(annos), raakaainedao.getId(raakaaine)));
+                res.redirect("/annosMain");
+                return "";
+            }
             return "";
-            }else{
-*/
-            
-            System.out.println("blaa" + "blaa");
-            String maara = req.queryParams("maara");
-            String ohje = req.queryParams("ohje");
-            String annos = req.queryParams("joku");
-            System.out.println("blaa" + annos + "blaa");
-            String raakaaine = "vesi";
-            annosraakaainedao.uusi(new AnnosRaakaAine(-1, maara, ohje, annosdao.getId(annos), raakaainedao.getId(raakaaine)));
-            res.redirect("/annosMain");
-            return "";
-            //}
-        });
+        }
+    );
 
         // RAAKA-AINE -MAIN SIVUN KOODI
-        get("/raakaAineMain", (req, res) -> {
+    get( 
+        "/raakaAineMain", (req, res) -> {
 
             HashMap map = new HashMap<>();
-            map.put("raakaaineet", raakaainedao.listaaKaikki());
+        map.put("raakaaineet", raakaainedao.listaaKaikki());
 
-            return new ModelAndView(map, "raaka-aine -main");
-        }, new ThymeleafTemplateEngine());
+        return new ModelAndView(map, "raaka-aine -main");
+    }
+     ,
+
+    new ThymeleafTemplateEngine()
+
+    );
 
         //POISTOOnnistus
-        get("/raakaaineet/:id", (req, res) -> {
+    get( 
+        "/raakaaineet/:id", (req, res) -> {
 
             int poistoId = Integer.parseInt(req.params("id"));
-            raakaainedao.poistaId(poistoId);
-            HashMap map = new HashMap<>();
-            map.put("raakaaineet", raakaainedao.listaaKaikki());
-            return new ModelAndView(map, "raaka-aine -main");
-        }, new ThymeleafTemplateEngine());
+        raakaainedao.poistaId(poistoId);
+        HashMap map = new HashMap<>();
+        map.put("raakaaineet", raakaainedao.listaaKaikki());
+        return new ModelAndView(map, "raaka-aine -main");
+    }
+     ,
+
+    new ThymeleafTemplateEngine()
+
+    );
 
         // Raaka-ainesivun lomakkeen käsittely
-        Spark.post("/raakaAineMain", (req, res) -> {
+    Spark.post ( 
+        "/raakaAineMain", (req, res) -> {
             String nimi = req.queryParams("nimi");
-            raakaainedao.uusi(new RaakaAine(-1, nimi));
-            res.redirect("/raakaAineMain");
-            return "";
-        });
+        raakaainedao.uusi(new RaakaAine(-1, nimi));
+        res.redirect("/raakaAineMain");
+        return "";
+    }
+
+);
 
 //
 //        get("/opiskelijat", (req, res) -> {
