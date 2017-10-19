@@ -30,9 +30,19 @@
 
         <form method="POST" action="/annosMain">
             Annoksen nimi:<br/>
-            <input type="text" name="tähän tulee lista olemassaolevista annoksista (ei toimi)"/><br/>
+            <select>
+                <option th:each="annos: ${annokset}">
+                    <span th:text="${annos.nimi}"> annoksen nimi</span>
+                </option>
+            </select>
+            <br/>
             Lisättävä raaka-aine<br/>
-            <input type="text" name="tähän tulee lista olemassaolevista raaka-aineista (ei toimi)"/><br/>
+            <select>
+                <option th:each="ra: ${rat}">
+                    <span th:text="${ra.nimi}"> ran nimi</span>
+                </option>
+            </select>
+            <br/>
             Järjestys<br/>
             <input type="text" name="jarjestys"/><br/>
             Määrä<br/>

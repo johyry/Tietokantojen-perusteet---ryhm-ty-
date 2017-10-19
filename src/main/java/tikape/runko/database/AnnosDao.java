@@ -57,7 +57,7 @@ public class AnnosDao implements Dao<Annos, Integer>{
     //SQL-injektiovaara?
     public void poista(String nimi) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("DELETE FROM Annos WHERE = '" + nimi + "'");
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM Annos WHERE nimi = '" + nimi + "'");
         stmt.executeUpdate();
         stmt.close();
         connection.close();

@@ -12,8 +12,8 @@
         
         <ol>
             <li th:each="aine: ${raakaaineet}">
-                <span th:text="${aine.nimi}">raaka-aineen nimi</span> <a th:href="${'/raakaaineet/' + aine.id}">Poista (ei toimi)</a>
-
+                <span th:text="${aine.nimi}">raaka-aineen nimi</span>
+                <a th:href="${'/raakaaineet/' + aine.id}">Poista</a>
             </li>
         </ol>
         
@@ -25,7 +25,6 @@
             <input type="text" name="nimi"/><br/>
             <input type="submit" value="Lisää"/>
         </form>
-        
                 <p><a href="/annosMain">Annoslistaukseen!</a></p>
 
         

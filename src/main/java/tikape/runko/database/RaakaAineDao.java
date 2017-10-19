@@ -18,6 +18,7 @@ import tikape.runko.domain.RaakaAine;
  * @author stobe
  */
 public class RaakaAineDao implements Dao<RaakaAine, Integer> {
+
     private Database database;
 
     public RaakaAineDao(Database database) {
@@ -42,20 +43,28 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
         return raineet;
     }
-    
-    public void uusi(String nimi) throws SQLException {
+
+    public void uusi(RaakaAine ra) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO RaakaAine(nimi) VALUES(?)");
-        stmt.setString(1, nimi);
+        stmt.setString(1, ra.getNimi());
         stmt.executeUpdate();
         stmt.close();
         connection.close();
     }
-    
+
     //SQL-injektiovaara?
     public void poista(String nimi) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("DELETE FROM RaakaAine WHERE = '" + nimi + "'");
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM RaakaAine WHERE nimi = '" + nimi + "'");
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
+
+    public void poistaId(int id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM RaakaAine WHERE id = '" + id + "'");
         stmt.executeUpdate();
         stmt.close();
         connection.close();

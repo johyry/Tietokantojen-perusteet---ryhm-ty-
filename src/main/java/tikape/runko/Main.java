@@ -3,6 +3,7 @@ package tikape.runko;
 import java.util.HashMap;
 import java.util.List;
 import spark.ModelAndView;
+import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AnnosDao;
@@ -18,49 +19,54 @@ public class Main {
 
         RaakaAineDao raakaainedao = new RaakaAineDao(database);
         AnnosDao annosdao = new AnnosDao(database);
-        
-        List<RaakaAine> lista = raakaainedao.listaaKaikki();
-        
-        
-        
-        
-        // PÄÄSIVUN KOODI ALLA
 
+        List<RaakaAine> lista = raakaainedao.listaaKaikki();
+
+        // PÄÄSIVUN KOODI ALLA
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viesti", "random shit");
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
-        
-        
+
         // ANNOS-MAIN SIVUN KOODI
-        
         get("/annosMain", (req, res) -> {
-            
-                       
+
             HashMap map = new HashMap<>();
             map.put("annokset", annosdao.listaaKaikki());
+            map.put("rat", raakaainedao.listaaKaikki());
 
             return new ModelAndView(map, "annosmain");
         }, new ThymeleafTemplateEngine());
-        
-        
+
         // RAAKA-AINE -MAIN SIVUN KOODI
-        
-         get("/raakaAineMain", (req, res) -> {
-             
-             
+        get("/raakaAineMain", (req, res) -> {
+
             HashMap map = new HashMap<>();
-            // mappi raaka-aineista
             map.put("raakaaineet", raakaainedao.listaaKaikki());
 
             return new ModelAndView(map, "raaka-aine -main");
         }, new ThymeleafTemplateEngine());
-         
-         
-         
-        
+
+        //POISTOOnnistus
+        get("/raakaaineet/:id", (req, res) -> {
+
+            int poistoId = Integer.parseInt(req.params("id"));
+            raakaainedao.poistaId(poistoId);
+            HashMap map = new HashMap<>();
+            map.put("raakaaineet", raakaainedao.listaaKaikki());
+            return new ModelAndView(map, "raaka-aine -main");
+        }, new ThymeleafTemplateEngine());
+
+        // Raaka-ainesivun lomakkeen käsittely
+        Spark.post("/raakaAineMain", (req, res) -> {
+            String nimi = req.queryParams("nimi");
+            raakaainedao.uusi(new RaakaAine(-1, nimi));
+            res.redirect("/raakaAineMain");
+            return "";
+        });
+
 //
 //        get("/opiskelijat", (req, res) -> {
 //            HashMap map = new HashMap<>();
@@ -68,7 +74,6 @@ public class Main {
 //
 //            return new ModelAndView(map, "opiskelijat");
 //        }, new ThymeleafTemplateEngine());
-
 //        get("/opiskelijat/:id", (req, res) -> {
 //            HashMap map = new HashMap<>();
 //            map.put("opiskelija", raakaainedao.listaaKaikki(Integer.parseInt(req.params("id"))));
