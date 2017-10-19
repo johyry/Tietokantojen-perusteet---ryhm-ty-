@@ -30,8 +30,8 @@
 
         <form method="POST" action="/annosMain">
             Annoksen nimi:<br/>
-            <select>
-                <option th:each="annos: ${annokset}" name="annosValikko">
+            <select name="annosValikko">
+                <option th:each="annos: ${annokset}">
                     <span th:text="${annos.nimi}"> annoksen nimi</span>
                 </option>
             </select>
@@ -43,8 +43,6 @@
                 </option>
             </select>
             <br/>
-<!--            Järjestys<br/>
-            <input type="text" name="jarjestys"/><br/>-->
             Määrä<br/>
             <input type="text" name="maara"/><br/>
             Ohje<br/>
