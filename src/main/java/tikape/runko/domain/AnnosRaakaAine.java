@@ -1,6 +1,10 @@
 
 package tikape.runko.domain;
 
+import java.sql.SQLException;
+import tikape.runko.database.AnnosDao;
+import tikape.runko.database.RaakaAineDao;
+
 public class AnnosRaakaAine {
     
     private Integer jarjestys;
@@ -13,7 +17,7 @@ public class AnnosRaakaAine {
     public AnnosRaakaAine() {
         
     }
-    public AnnosRaakaAine(Integer jarjestys, String maara, String ohje, Integer raaka_aine_id, Integer annos_id) {
+    public AnnosRaakaAine(Integer jarjestys, String maara, String ohje, int raaka_aine_id, int annos_id) throws SQLException {
         this.jarjestys = jarjestys;
         this.maara = maara;
         this.ohje = ohje;

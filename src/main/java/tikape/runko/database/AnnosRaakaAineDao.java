@@ -24,6 +24,17 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public AnnosRaakaAineDao(Database database) {
         this.database = database;
     }
+    
+    public void uusi(AnnosRaakaAine ara) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine VALUES(?, ?, ?)");
+        stmt.setInt(1, ara.getAnnos_id());
+        stmt.setInt(2, ara.getRaaka_aine_id());
+        stmt.setString(3, ara.getOhje());
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
 
     
     public List<AnnosRaakaAine> listaaKaikki() throws SQLException {

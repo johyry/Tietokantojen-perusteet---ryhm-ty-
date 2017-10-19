@@ -69,4 +69,15 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
         stmt.close();
         connection.close();
     }
+    
+    public int getId(String nimi) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE nimi = '" + nimi + "'");
+        ResultSet rs = stmt.executeQuery();
+        stmt.close();
+        int palaute = rs.getInt("id");
+        rs.close();
+        connection.close();
+        return palaute;
+    }
 }

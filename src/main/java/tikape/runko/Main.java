@@ -11,6 +11,7 @@ import tikape.runko.database.AnnosRaakaAineDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.RaakaAineDao;
 import tikape.runko.domain.Annos;
+import tikape.runko.domain.AnnosRaakaAine;
 import tikape.runko.domain.RaakaAine;
 
 public class Main {
@@ -22,7 +23,7 @@ public class Main {
         RaakaAineDao raakaainedao = new RaakaAineDao(database);
         AnnosDao annosdao = new AnnosDao(database);
         AnnosRaakaAineDao annosraakaainedao = new AnnosRaakaAineDao(database);
-        
+
         int i = 0;
 
         List<RaakaAine> lista = raakaainedao.listaaKaikki();
@@ -44,28 +45,39 @@ public class Main {
 
             return new ModelAndView(map, "annosmain");
         }, new ThymeleafTemplateEngine());
-        
+
         // Annossivun lomakkeen käsittely
-        Spark.post("/annosMain", (req, res) -> {
-            String nimi = req.queryParams("nimi");
-            annosdao.uusi(new Annos(-1, nimi));
-            res.redirect("/annosMain");
-            return "";
-        });
-        
-         //Liitostaulun lomakkeen käsittely
 //        Spark.post("/annosMain", (req, res) -> {
-//            int jarjestys = Integer.parseInt(req.queryParams("jarjestys"));
-//            String maara = req.queryParams("maara");
-//            String ohje = req.queryParams("ohje");
-//            String annos = req.queryParams("joku");
-//            annosraakaainedao.uusi(new AnnosRaakaAine(jarjestys, maara, ohje, ));
+//            String nimi = req.queryParams("nimi");
+//            annosdao.uusi(new Annos(-1, nimi));
 //            res.redirect("/annosMain");
 //            return "";
 //        });
 
-
         
+        
+        //Liitostaulun lomakkeen käsittely 
+        Spark.post("/annosMain", (req, res) -> {
+            /*
+            if(req.queryParams("ohje").length() == 0){
+            String nimi = req.queryParams("nimi");
+            annosdao.uusi(new Annos(-1, nimi));
+            res.redirect("/annosMain");
+            return "";
+            }else{
+*/
+            
+            System.out.println("blaa" + "blaa");
+            String maara = req.queryParams("maara");
+            String ohje = req.queryParams("ohje");
+            String annos = req.queryParams("joku");
+            System.out.println("blaa" + annos + "blaa");
+            String raakaaine = "vesi";
+            annosraakaainedao.uusi(new AnnosRaakaAine(-1, maara, ohje, annosdao.getId(annos), raakaainedao.getId(raakaaine)));
+            res.redirect("/annosMain");
+            return "";
+            //}
+        });
 
         // RAAKA-AINE -MAIN SIVUN KOODI
         get("/raakaAineMain", (req, res) -> {
