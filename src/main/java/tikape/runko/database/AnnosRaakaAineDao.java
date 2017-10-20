@@ -19,12 +19,13 @@ import tikape.runko.domain.RaakaAine;
  * @author stobe
  */
 public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
+
     private Database database;
 
     public AnnosRaakaAineDao(Database database) {
         this.database = database;
     }
-    
+
     public void uusi(AnnosRaakaAine ara) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine VALUES(?, ?, ?, ?, ?)");
@@ -38,7 +39,6 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         connection.close();
     }
 
-    
     public List<AnnosRaakaAine> listaaKaikki() throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine");
@@ -61,5 +61,41 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         return raineet;
     }
 
+    public AnnosRaakaAine findOne(Integer key) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer jarjestys = rs.getInt("jarjestys");
+        String maara = rs.getString("maara");
+        String ohje = rs.getString("ohje");
+        Integer raaka_aine_id = rs.getInt("raaka_aine_id");
+        Integer annos_id = rs.getInt("annos_id");
+        
+        AnnosRaakaAine o = new AnnosRaakaAine(jarjestys, maara, ohje, raaka_aine_id, annos_id);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return o;
+    }
+
+    public int getId(String nimi) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos WHERE nimi = '" + nimi + "'");
+        ResultSet rs = stmt.executeQuery();
+        int palaute = rs.getInt("id");
+        stmt.close();
+        rs.close();
+        connection.close();
+        return palaute;
+    }
 
 }

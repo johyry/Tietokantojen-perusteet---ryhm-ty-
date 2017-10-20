@@ -86,8 +86,7 @@ public class Main {
 
                     return new ModelAndView(map, "raaka-aine -main");
                 },
-
-                 new ThymeleafTemplateEngine()
+                new ThymeleafTemplateEngine()
         );
 
         //POISTOOnnistus raakikselle
@@ -100,13 +99,11 @@ public class Main {
                     map.put("raakaaineet", raakaainedao.listaaKaikki());
                     return new ModelAndView(map, "raaka-aine -main");
                 },
-
-                 new ThymeleafTemplateEngine()
+                new ThymeleafTemplateEngine()
         );
 
         // poistotus annokselle
-        get(
-                "/annokset/:id/poista", (req, res) -> {
+        get("/annokset/:id/poista", (req, res) -> {
 
                     int poistoId = Integer.parseInt(req.params("id"));
                     annosdao.poistaId(poistoId);
@@ -114,10 +111,20 @@ public class Main {
                     map.put("annokset", annosdao.listaaKaikki());
                     return new ModelAndView(map, "annosmain");
                 },
-
-                 new ThymeleafTemplateEngine()
+                new ThymeleafTemplateEngine()
         );
 
+        // annoskohtaiset sivut
+        get("/annokset/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("annos", annosdao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("annosraakis", annosraakaainedao.findOne(Integer.parseInt(req.params("id"))));
+
+            return new ModelAndView(map, "annokset");
+        }, new ThymeleafTemplateEngine());
+
+        
+        
         // Raaka-ainesivun lomakkeen käsittely
         Spark.post(
                 "/raakaAineMain", (req, res) -> {
