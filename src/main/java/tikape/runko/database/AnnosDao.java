@@ -63,6 +63,16 @@ public class AnnosDao implements Dao<Annos, Integer>{
         connection.close();
     }
     
+    public void poistaId(int id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM Annos WHERE id = '" + id + "'");
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
+    }
+    
+    
+    
     public int getId(String nimi) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos WHERE nimi = '" + nimi + "'");
