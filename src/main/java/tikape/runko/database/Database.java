@@ -37,21 +37,21 @@ public class Database {
 
     private List<String> sqliteLauseet() {
         ArrayList<String> lista = new ArrayList<>();
-        
-        
+
+        // TESTIDATA
         lista.add("CREATE TABLE Annos (id integer PRIMARY KEY, nimi varchar(255));");
         lista.add("INSERT INTO Annos (nimi) VALUES ('voileipä');"); //1
         lista.add("INSERT INTO Annos (nimi) VALUES ('hernerokka');"); //2
         lista.add("INSERT INTO Annos (nimi) VALUES ('vesikeitto');"); //3
         lista.add("INSERT INTO Annos (nimi) VALUES ('kaurapuuro');"); //4
-        
+
         lista.add("CREATE TABLE RaakaAine (id integer PRIMARY KEY, nimi varchar(255));");
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('vesi');"); //1
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('voi');");//2
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('kaurahiutaleita');");//3
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('leipä');");//4
         lista.add("INSERT INTO RaakaAine (nimi) VALUES ('hernekeitto');");//5
-        
+
         lista.add("CREATE TABLE AnnosRaakaAine "
                 + "(raaka_aine_id integer,"
                 + " annos_id integer,"
@@ -63,8 +63,6 @@ public class Database {
 
         lista.add("INSERT INTO AnnosRaakaAine (raaka_aine_id, annos_id, jarjestys, maara, ohje)"
                 + "VALUES (1, 3, 1, 'sopivasti', 'keitä vesi lämpimäksi')");
-        
-        //lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Homeros');");
 
         return lista;
     }

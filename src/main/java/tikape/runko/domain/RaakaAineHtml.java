@@ -22,7 +22,7 @@ public class RaakaAineHtml {
         this.ohje = ara.getOhje();
         this.nimi2 = dao.findOne(ara.getRaaka_aine_id()).getNimi();
         this.annos = dao2.findOne(ara.getAnnos_id()).getNimi();
-        this.nimi = nimi2 + " " + maara + " " + ohje;
+        this.nimi = nimi2 + ", " + maara + ", " + ohje;
     }
 
     public Integer getJarjestys() {
