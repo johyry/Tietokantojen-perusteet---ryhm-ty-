@@ -14,6 +14,7 @@ import tikape.runko.database.RaakaAineDao;
 import tikape.runko.domain.Annos;
 import tikape.runko.domain.AnnosRaakaAine;
 import tikape.runko.domain.RaakaAine;
+import tikape.runko.domain.RaakaAineHtml;
 
 public class Main {
 
@@ -117,30 +118,21 @@ public class Main {
 
         // annoskohtaiset sivut
         get("/annokset/:id", (req, res) -> {
-            String ida = req.params("id");
-            int id = Integer.parseInt(ida);
+            int id = Integer.parseInt(req.params("id"));
             
             HashMap map = new HashMap<>();
             map.put("annos", annosdao.findOne(id));
             
-           
-            
             List<AnnosRaakaAine> a = annosraakaainedao.raakisLista(id);
-//            
-            ArrayList<String> palautettava = new ArrayList<>();
+            List<RaakaAineHtml> palautettava = new ArrayList<>();
             
             for (int i = 0; i < a.size(); i++) {
-                RaakaAine ra = raakaainedao.findOne(a.get(i).getRaaka_aine_id());
-                String asd = ra.getNimi() + ", " +  a.get(i).getMaara() + " kpl.";
-                palautettava.add(asd);
+                AnnosRaakaAine ra = a.get(i);
+                RaakaAineHtml ra2 = new RaakaAineHtml(ra, raakaainedao, annosdao);
+                palautettava.add(ra2);
             }
             
-            map.put("raaka-aineet", palautettava);
-//            
-            
-            
-            
-
+            map.put("raakaaineet", palautettava);
             
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());

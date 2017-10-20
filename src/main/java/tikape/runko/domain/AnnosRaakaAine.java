@@ -13,10 +13,6 @@ public class AnnosRaakaAine {
     private Integer raaka_aine_id;
     private Integer annos_id;
     
-    
-    public AnnosRaakaAine() {
-        
-    }
     public AnnosRaakaAine(Integer jarjestys, String maara, String ohje, int raaka_aine_id, int annos_id) throws SQLException {
         this.jarjestys = jarjestys;
         this.maara = maara;
