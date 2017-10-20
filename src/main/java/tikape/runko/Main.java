@@ -54,6 +54,7 @@ public class Main {
 //            return "";
 //        });
         //Liitostaulun lomakkeen käsittely 
+        
         Spark.post("/annosMain", (req, res) -> {
             if (req.queryParams("valikko").equals("1")) {
                 String nimi = req.queryParams("nimi");
@@ -67,7 +68,8 @@ public class Main {
                 String ohje = req.queryParams("ohje");
                 String annos = req.queryParams("annosValikko");
                 String raakaaine = req.queryParams("raakaaineValikko");
-                annosraakaainedao.uusi(new AnnosRaakaAine(-1, maara, ohje, annosdao.getId(annos), raakaainedao.getId(raakaaine)));
+                System.out.println("Annos: " + annos + " RaakaAine: " + raakaaine);
+                annosraakaainedao.uusi(new AnnosRaakaAine(-1, maara, ohje, raakaainedao.getId(raakaaine), annosdao.getId(annos)));
                 res.redirect("/annosMain");
                 return "";
             }
