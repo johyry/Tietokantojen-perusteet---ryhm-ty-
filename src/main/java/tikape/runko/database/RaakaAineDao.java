@@ -24,6 +24,29 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     public RaakaAineDao(Database database) {
         this.database = database;
     }
+    
+    public RaakaAine findOne(Integer key) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM RaakaAine WHERE id = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        Integer id = rs.getInt("id");
+        String nimi = rs.getString("nimi");
+
+        RaakaAine o = new RaakaAine(id, nimi);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return o;
+    }
 
     public List<RaakaAine> listaaKaikki() throws SQLException {
         Connection connection = database.getConnection();

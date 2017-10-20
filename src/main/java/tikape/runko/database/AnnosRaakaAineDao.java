@@ -60,6 +60,29 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
 
         return raineet;
     }
+    
+    public List<AnnosRaakaAine> raakisLista(Integer key) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM AnnosRaakaAine WHERE annos_id = ?");
+        stmt.setObject(1, key);
+
+        ResultSet rs = stmt.executeQuery();
+        List<AnnosRaakaAine> raineet = new ArrayList<>();
+        while (rs.next()) {
+            Integer jarjestys = rs.getInt("jarjestys");
+            String maara = rs.getString("maara");
+            String ohje = rs.getString("ohje");
+            Integer raaka_aine_id = rs.getInt("raaka_aine_id");
+            Integer annos_id = rs.getInt("annos_id");
+            raineet.add(new AnnosRaakaAine(jarjestys, maara, ohje, raaka_aine_id, annos_id));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return raineet;
+    }
 
     public AnnosRaakaAine findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();

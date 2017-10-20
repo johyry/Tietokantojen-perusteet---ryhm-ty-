@@ -1,5 +1,6 @@
 package tikape.runko;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import spark.ModelAndView;
@@ -24,7 +25,7 @@ public class Main {
         AnnosDao annosdao = new AnnosDao(database);
         AnnosRaakaAineDao annosraakaainedao = new AnnosRaakaAineDao(database);
 
-        int i = 0;
+        
 
         List<RaakaAine> lista = raakaainedao.listaaKaikki();
 
@@ -116,10 +117,31 @@ public class Main {
 
         // annoskohtaiset sivut
         get("/annokset/:id", (req, res) -> {
+            String ida = req.params("id");
+            int id = Integer.parseInt(ida);
+            
             HashMap map = new HashMap<>();
-            map.put("annos", annosdao.findOne(Integer.parseInt(req.params("id"))));
-            map.put("annosraakis", annosraakaainedao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("annos", annosdao.findOne(id));
+            
+           
+            
+            List<AnnosRaakaAine> a = annosraakaainedao.raakisLista(id);
+//            
+            ArrayList<String> palautettava = new ArrayList<>();
+            
+            for (int i = 0; i < a.size(); i++) {
+                RaakaAine ra = raakaainedao.findOne(a.get(i).getRaaka_aine_id());
+                String asd = ra.getNimi() + ", " +  a.get(i).getMaara() + " kpl.";
+                palautettava.add(asd);
+            }
+            
+            map.put("raaka-aineet", palautettava);
+//            
+            
+            
+            
 
+            
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());
 
@@ -149,4 +171,6 @@ public class Main {
 //            return new ModelAndView(map, "opiskelija");
 //        }, new ThymeleafTemplateEngine());
     }
+
+    
 }
