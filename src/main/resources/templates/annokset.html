@@ -9,14 +9,14 @@
     <body>
         <h1>Tervetuloa annoksen <span th:text="${annos.nimi}">annos</span> sivulle</h1>
 
-        <p><span th:text="${annos.nimi}">annos</span>: </p>
+        <p>Annokseen <span th:text="${annos.nimi}">annos</span> kuuluu: </p>
 
 <!--        <ol>
             <li th:each="aine: ${raakaaineet}">
                 <span th:text="${aine.nimi}">raaka-aineen nimi</span>
             </li>
         </ol>-->
-
+                
         <ol>
             <li th:each="aine: ${raakaaineet}">
                 <span th:text="${aine.nimi}">raaka-aineen nimi</span>

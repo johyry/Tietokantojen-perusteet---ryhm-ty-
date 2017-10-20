@@ -26,8 +26,6 @@ public class Main {
         AnnosDao annosdao = new AnnosDao(database);
         AnnosRaakaAineDao annosraakaainedao = new AnnosRaakaAineDao(database);
 
-        
-
         List<RaakaAine> lista = raakaainedao.listaaKaikki();
 
         // PÄÄSIVUN KOODI ALLA
@@ -68,8 +66,7 @@ public class Main {
                 String maara = req.queryParams("maara");
                 String ohje = req.queryParams("ohje");
                 String annos = req.queryParams("annosValikko");
-                System.out.println("blaa" + annos + "blaa");
-                String raakaaine = "vesi";
+                String raakaaine = req.queryParams("raakaaineValikko");
                 annosraakaainedao.uusi(new AnnosRaakaAine(-1, maara, ohje, annosdao.getId(annos), raakaainedao.getId(raakaaine)));
                 res.redirect("/annosMain");
                 return "";
@@ -107,38 +104,37 @@ public class Main {
         // poistotus annokselle
         get("/annokset/:id/poista", (req, res) -> {
 
-                    int poistoId = Integer.parseInt(req.params("id"));
-                    annosdao.poistaId(poistoId);
-                    HashMap map = new HashMap<>();
-                    map.put("annokset", annosdao.listaaKaikki());
-                    return new ModelAndView(map, "annosmain");
-                },
+            int poistoId = Integer.parseInt(req.params("id"));
+            annosdao.poistaId(poistoId);
+            HashMap map = new HashMap<>();
+            map.put("annokset", annosdao.listaaKaikki());
+            return new ModelAndView(map, "annosmain");
+        },
                 new ThymeleafTemplateEngine()
         );
 
         // annoskohtaiset sivut
         get("/annokset/:id", (req, res) -> {
             int id = Integer.parseInt(req.params("id"));
-            
+
             HashMap map = new HashMap<>();
             map.put("annos", annosdao.findOne(id));
-            
+
             List<AnnosRaakaAine> a = annosraakaainedao.raakisLista(id);
             List<RaakaAineHtml> palautettava = new ArrayList<>();
-            
+
             for (int i = 0; i < a.size(); i++) {
+
                 AnnosRaakaAine ra = a.get(i);
                 RaakaAineHtml ra2 = new RaakaAineHtml(ra, raakaainedao, annosdao);
                 palautettava.add(ra2);
             }
-            
+
             map.put("raakaaineet", palautettava);
-            
+
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());
 
-        
-        
         // Raaka-ainesivun lomakkeen käsittely
         Spark.post(
                 "/raakaAineMain", (req, res) -> {
@@ -164,5 +160,4 @@ public class Main {
 //        }, new ThymeleafTemplateEngine());
     }
 
-    
 }
