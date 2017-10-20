@@ -13,7 +13,7 @@
         <ol>
             <li th:each="aine: ${raakaaineet}">
                 <span th:text="${aine.nimi}">raaka-aineen nimi</span>
-                <a th:href="${'/raakaaineet/' + aine.id}">Poista</a>
+                <a th:href="${'/raakaaineet/' + aine.id + '/poista'}">Poista</a>
             </li>
         </ol>
         

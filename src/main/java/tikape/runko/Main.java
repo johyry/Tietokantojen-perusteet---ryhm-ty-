@@ -75,6 +75,10 @@ public class Main {
             return "";
         }
     );
+        
+        // ANNOKSEN OMA SIVU
+        
+        
 
         // RAAKA-AINE -MAIN SIVUN KOODI
     get( 
@@ -93,7 +97,7 @@ public class Main {
 
         //POISTOOnnistus
     get( 
-        "/raakaaineet/:id", (req, res) -> {
+        "/raakaaineet/:id/poista", (req, res) -> {
 
             int poistoId = Integer.parseInt(req.params("id"));
         raakaainedao.poistaId(poistoId);
