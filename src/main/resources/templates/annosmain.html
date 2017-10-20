@@ -13,7 +13,19 @@
 
         <ol>
             <li th:each="opiskelija: ${annokset}">
-                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/annokset/' + opiskelija.id + '/poista'}">poista</a>
+                <a th:href='@{~/annokset/{id}(id=${opiskelija.id})}'>
+                    <span th:text='${opiskelija.nimi}'>Opiskelija</span>  <a th:href="${'/annokset/' + opiskelija.id + '/poista'}">poista</a>
+                </a>
+                
+               
+            </li>
+        </ol>
+        
+        <ol>
+            <li th:each="opiskelija: ${opiskelijat}">
+                <a th:href='@{~/opiskelijat/{id}(id=${opiskelija.id})}'>
+                    <span th:text='${opiskelija.nimi}'>Opiskelija</span>
+                </a>
             </li>
         </ol>
 
