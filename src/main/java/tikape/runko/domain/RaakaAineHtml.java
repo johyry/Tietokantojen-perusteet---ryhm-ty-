@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Tarvittiin uusi olio Thymeleaffin takia, joten teimme luokan "RaakaAineHtml"
  */
 package tikape.runko.domain;
 
@@ -10,10 +8,6 @@ import tikape.runko.database.AnnosDao;
 import tikape.runko.database.AnnosRaakaAineDao;
 import tikape.runko.database.RaakaAineDao;
 
-/**
- *
- * @author stobe
- */
 public class RaakaAineHtml {
     private Integer jarjestys;
     private String maara;

@@ -31,8 +31,7 @@ public class Main {
         // PÄÄSIVUN KOODI ALLA
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "random shit");
-
+            
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
@@ -46,15 +45,7 @@ public class Main {
             return new ModelAndView(map, "annosmain");
         }, new ThymeleafTemplateEngine());
 
-        // Annossivun lomakkeen käsittely
-//        Spark.post("/annosMain", (req, res) -> {
-//            String nimi = req.queryParams("nimi");
-//            annosdao.uusi(new Annos(-1, nimi));
-//            res.redirect("/annosMain");
-//            return "";
-//        });
         //Liitostaulun lomakkeen käsittely 
-        
         Spark.post("/annosMain", (req, res) -> {
             if (req.queryParams("valikko").equals("1")) {
                 String nimi = req.queryParams("nimi");
@@ -90,7 +81,7 @@ public class Main {
                 new ThymeleafTemplateEngine()
         );
 
-        //POISTOOnnistus raakikselle
+        //Poisto-ominaisuus raaka-aineelle
         get(
                 "/raakaaineet/:id/poista", (req, res) -> {
 
@@ -103,7 +94,7 @@ public class Main {
                 new ThymeleafTemplateEngine()
         );
 
-        // poistotus annokselle
+        // Poisto-ominaisuus annokselle
         get("/annokset/:id/poista", (req, res) -> {
 
             int poistoId = Integer.parseInt(req.params("id"));
@@ -115,7 +106,7 @@ public class Main {
                 new ThymeleafTemplateEngine()
         );
 
-        // annoskohtaiset sivut
+        // Annoskohtaiset sivut
         get("/annokset/:id", (req, res) -> {
             int id = Integer.parseInt(req.params("id"));
 
@@ -147,19 +138,6 @@ public class Main {
                 }
         );
 
-//
-//        get("/opiskelijat", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("opiskelijat", raakaainedao.listaaKaikki());
-//
-//            return new ModelAndView(map, "opiskelijat");
-//        }, new ThymeleafTemplateEngine());
-//        get("/opiskelijat/:id", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("opiskelija", raakaainedao.listaaKaikki(Integer.parseInt(req.params("id"))));
-//
-//            return new ModelAndView(map, "opiskelija");
-//        }, new ThymeleafTemplateEngine());
     }
 
 }

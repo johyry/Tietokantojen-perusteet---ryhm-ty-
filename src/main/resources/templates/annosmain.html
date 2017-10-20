@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Annokset</title>
         <meta charset="utf-8" />
     </head>
 
@@ -12,22 +12,16 @@
 
 
         <ol>
-            <li th:each="opiskelija: ${annokset}">
-                <a th:href='@{~/annokset/{id}(id=${opiskelija.id})}'>
-                    <span th:text='${opiskelija.nimi}'>Opiskelija</span>  <a th:href="${'/annokset/' + opiskelija.id + '/poista'}">poista</a>
+            <li th:each="annos: ${annokset}">
+                <a th:href='@{~/annokset/{id}(id=${annos.id})}'>
+                    <span th:text='${annos.nimi}'>Annos</span>  <a th:href="${'/annokset/' + annos.id + '/poista'}">poista</a>
                 </a>
-                
-               
+
+
             </li>
         </ol>
-        
-        <ol>
-            <li th:each="opiskelija: ${opiskelijat}">
-                <a th:href='@{~/opiskelijat/{id}(id=${opiskelija.id})}'>
-                    <span th:text='${opiskelija.nimi}'>Opiskelija</span>
-                </a>
-            </li>
-        </ol>
+
+
 
         <h2> Luo uusi annos </h2>
 
@@ -38,7 +32,7 @@
             <input type="submit" value="Lisää"/>
         </form>
         <br> </br>
-        
+
         <h2> Lisää annokseen raaka-aine </h2>
 
         <form method="POST" action="/annosMain">
@@ -63,7 +57,7 @@
             <input type="text" name="ohje"/><br/>
             <input type="submit" value="Lisää"/>
         </form>
-        
+
         <p><a href="/raakaAineMain">Raaka-aine listaus!</a></p>
 
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>Annos</title>
         <meta charset="utf-8" />
     </head>
 
@@ -11,11 +11,6 @@
 
         <p>Annokseen <span th:text="${annos.nimi}">annos</span> kuuluu: </p>
 
-<!--        <ol>
-            <li th:each="aine: ${raakaaineet}">
-                <span th:text="${aine.nimi}">raaka-aineen nimi</span>
-            </li>
-        </ol>-->
                 
         <ol>
             <li th:each="aine: ${raakaaineet}">
