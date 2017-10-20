@@ -67,8 +67,7 @@ public class Main {
                 String maara = req.queryParams("maara");
                 String ohje = req.queryParams("ohje");
                 String annos = req.queryParams("annosValikko");
-                System.out.println("blaa" + annos + "blaa");
-                String raakaaine = "vesi";
+                String raakaaine = req.queryParams("raakaaineValikko");
                 annosraakaainedao.uusi(new AnnosRaakaAine(-1, maara, ohje, annosdao.getId(annos), raakaainedao.getId(raakaaine)));
                 res.redirect("/annosMain");
                 return "";
@@ -133,7 +132,10 @@ public class Main {
                 RaakaAine ra = raakaainedao.findOne(a.get(i).getRaaka_aine_id());
                 String asd = ra.getNimi() + ", " +  a.get(i).getMaara() + " kpl.";
                 palautettava.add(asd);
+                System.out.println(asd);
             }
+            
+            
             
             map.put("raaka-aineet", palautettava);
 //            
